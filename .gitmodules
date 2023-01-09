@@ -1,0 +1,3 @@
+[submodule "api/auth-service-api"]
+	path = api/auth-service-api
+	url = git@github.com:ruslanSorokin/auth-service-api.git
