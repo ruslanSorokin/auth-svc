@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/ruslanSorokin/auth-service/internal/pkg/config"
+	config "github.com/ruslanSorokin/auth-service/config"
 )
 
 func main() {

@@ -6,14 +6,13 @@ import (
 	"github.com/spf13/viper"
 )
 
-const config_path = "configs/"
+const config_path = "config/configs"
 
 type Config struct {
-	PrivateAuthServerHostname string `mapstructure:"PRIVATE_SERVER_HOST"`
-	PrivateAuthServerPort     string `mapstructure:"PRIVATE_SERVER_PORT"`
+	MongoDBURI string `mapstructure:"MDB_URI"`
 
-	PublicAuthServerHostname string `mapstructure:"PUBLIC_SERVER_HOST"`
-	PublicAuthServerPort     string `mapstructure:"PUBLIC_SERVER_PORT"`
+	InternalServicePort int `mapstructure:"INTERNAL_SERVICE_PORT"`
+	ExternalServicePort int `mapstructure:"EXTERNAL_SERVICE_PORT"`
 
 	AccessTokenSecretKey  string `mapstructure:"ACCESS_TOKEN_SECRET_KEY"`
 	RefreshTokenSecretKey string `mapstructure:"REFRESH_TOKEN_SECRET_KEY"`
