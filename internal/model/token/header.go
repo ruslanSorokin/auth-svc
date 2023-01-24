@@ -8,7 +8,3 @@ type Header struct {
 	IssuedAt  time.Time `json:"iat"`
 	ExpiredAt time.Time `json:"exp"`
 }
-
-type Payload struct {
-	UserID uint64
-}
