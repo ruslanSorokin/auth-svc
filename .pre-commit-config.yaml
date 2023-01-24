@@ -12,3 +12,8 @@ repos:
     hooks:
       - id: typos
         args: []
+
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v1.41.1
+    hooks:
+      - id: golangci-lint
