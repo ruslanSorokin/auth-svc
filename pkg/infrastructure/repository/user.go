@@ -6,8 +6,8 @@ import (
 	"github.com/ruslanSorokin/auth-service/pkg/model"
 )
 
-// IUserRepoEngine is an interface with only custom CRUD-like operations for User entity.
-type IUserRepoEngine interface {
-	GetUserById(ctx context.Context, uid int) (user model.User, err error)
-	GetUserByEmail(ctx context.Context, email string) (user model.User, err error)
+// IUserRepository is an interface with custom CRUD-like operations for User entity.
+type IUserRepository interface {
+	GetUserByID(ctx context.Context, userID *string) (*model.User, error)
+	GetUserByEmail(ctx context.Context, userEmail *string) (*model.User, error)
 }
