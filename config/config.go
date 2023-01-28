@@ -8,6 +8,7 @@ import (
 
 const configPath = "config/configs"
 
+// Config stores general parametrs for the entire authentication service
 type Config struct {
 	MongoDBURI string `mapstructure:"MDB_URI"`
 
@@ -23,6 +24,7 @@ type Config struct {
 	InternalPassword string `mapstructure:"INTERNAL_PASSWORD"`
 }
 
+// Load config from configPath/{name}
 func Load(name string) (cfg Config, err error) {
 	viper.AddConfigPath(configPath)
 	viper.SetConfigName(name)
