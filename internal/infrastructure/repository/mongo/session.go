@@ -11,18 +11,21 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+// SessionRepository is MongoDB implementation of ISessionRepository
 type SessionRepository struct {
 	db *mongo.Collection
 }
 
 var _ repository.ISessionRepository = SessionRepository{}
 
+// NewSessionRepository is a default constructor
 func NewSessionRepository(URI, dbName, collectionName string) *SessionRepository {
 	return &SessionRepository{
 		db: newInstance(URI, dbName).Collection(collectionName),
 	}
 }
 
+// CreateSession creates new session with given Session model and returns its ID
 func (r SessionRepository) CreateSession(ctx context.Context, s *model.Session) (*string, error) {
 	res, err := r.db.InsertOne(ctx, s)
 	id := string(res.InsertedID.(primitive.ObjectID).Hex())
@@ -32,6 +35,7 @@ func (r SessionRepository) CreateSession(ctx context.Context, s *model.Session) 
 	return &id, nil
 }
 
+// DeleteSessionByID deletes session by ID
 func (r SessionRepository) DeleteSessionByID(ctx context.Context, ID *string) error {
 	_, err := r.db.DeleteOne(ctx, bson.M{
 		"id": *ID,
@@ -42,6 +46,7 @@ func (r SessionRepository) DeleteSessionByID(ctx context.Context, ID *string) er
 	return nil
 }
 
+// DeleteSessionByUserID deletes session by UserID
 func (r SessionRepository) DeleteSessionByUserID(ctx context.Context, userID *string) error {
 	_, err := r.db.DeleteOne(ctx, bson.M{
 		"user_id": userID,
@@ -52,6 +57,7 @@ func (r SessionRepository) DeleteSessionByUserID(ctx context.Context, userID *st
 	return nil
 }
 
+// UpdateSessionByID updates session by ID
 func (r SessionRepository) UpdateSessionByID(ctx context.Context, ID *string, s *model.Session) error {
 	_, err := r.db.UpdateOne(ctx, bson.M{
 		"id": ID,
@@ -61,6 +67,8 @@ func (r SessionRepository) UpdateSessionByID(ctx context.Context, ID *string, s 
 	}
 	return nil
 }
+
+// UpdateSessionByUserID updates session by UserID
 func (r SessionRepository) UpdateSessionByUserID(ctx context.Context, userID *string, s *model.Session) error {
 	_, err := r.db.UpdateOne(ctx, bson.M{
 		"user_id": userID,
@@ -71,6 +79,7 @@ func (r SessionRepository) UpdateSessionByUserID(ctx context.Context, userID *st
 	return nil
 }
 
+// GetSessionByID returns Session model by ID
 func (r SessionRepository) GetSessionByID(ctx context.Context, ID *string) (*model.Session, error) {
 	s := new(model.Session)
 	res := r.db.FindOne(ctx, bson.M{
@@ -83,6 +92,7 @@ func (r SessionRepository) GetSessionByID(ctx context.Context, ID *string) (*mod
 	return s, nil
 }
 
+// GetSessionByUserID returns Sessions model by UserID
 func (r SessionRepository) GetSessionByUserID(ctx context.Context, userID *string) (*model.Session, error) {
 	s := new(model.Session)
 	res := r.db.FindOne(ctx, bson.M{
