@@ -32,6 +32,7 @@ func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session)
 	if err != nil {
 		return &id, err
 	}
+	s.ID = id
 	return &id, nil
 }
 
