@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-const config_path = "config/configs"
+const configPath = "config/configs"
 
 type Config struct {
 	MongoDBURI string `mapstructure:"MDB_URI"`
@@ -24,7 +24,7 @@ type Config struct {
 }
 
 func Load(name string) (cfg Config, err error) {
-	viper.AddConfigPath(config_path)
+	viper.AddConfigPath(configPath)
 	viper.SetConfigName(name)
 
 	viper.SetConfigType("env")
