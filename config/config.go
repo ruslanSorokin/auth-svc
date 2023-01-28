@@ -10,7 +10,7 @@ const configPath = "config/configs"
 
 // Config stores general parametrs for the entire authentication service
 type Config struct {
-	MongoDBURI string `mapstructure:"MDB_URI"`
+	MongoDBURI string `mapstructure:"MONGO_DB_URI"`
 
 	InternalServicePort int `mapstructure:"INTERNAL_SERVICE_PORT"`
 	ExternalServicePort int `mapstructure:"EXTERNAL_SERVICE_PORT"`
