@@ -2,10 +2,10 @@ package model
 
 // Session stored in the authentication service's DataBase.
 type Session struct {
-	ID          string `json:"id"`
-	RToken      string `json:"r_token"`
-	UserID      string `json:"user_id"`
-	Fingerprint string `json:"fingerprint"`
-	IP          string `json:"ip"`
-	ExpiresIn   int    `json:"expires_in"`
+	ID          string `bson:"id" json:"id"`
+	RToken      string `bson:"r_token" json:"r_token"`
+	UserID      string `bson:"user_id" json:"user_id"`
+	Fingerprint string `bson:"fingerprint" json:"fingerprint"`
+	IP          string `bson:"ip" json:"ip"`
+	ExpiresIn   int    `bson:"expires_in" json:"expires_in"`
 }
