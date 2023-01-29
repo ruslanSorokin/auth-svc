@@ -27,9 +27,14 @@ func NewUserRepository(URI, dbName, collectionName string) *UserRepository {
 // GetUserByID returns User model by UserID
 func (r *UserRepository) GetUserByID(ctx context.Context, userID *string) (*model.User, error) {
 	s := new(model.User)
+
 	res := r.db.FindOne(ctx, bson.M{
 		"id": userID,
 	})
+	if res.Err() != nil {
+		return nil, repository.ErrUserNotFound
+	}
+
 	err := res.Decode(s)
 	if err != nil {
 		return nil, err
@@ -40,9 +45,14 @@ func (r *UserRepository) GetUserByID(ctx context.Context, userID *string) (*mode
 // GetUserByEmail returns User model by UserEmail
 func (r *UserRepository) GetUserByEmail(ctx context.Context, userEmail *string) (*model.User, error) {
 	s := new(model.User)
+
 	res := r.db.FindOne(ctx, bson.M{
 		"email": userEmail,
 	})
+	if res.Err() != nil {
+		return nil, repository.ErrUserNotFound
+	}
+
 	err := res.Decode(s)
 	if err != nil {
 		return nil, err
