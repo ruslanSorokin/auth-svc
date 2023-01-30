@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-const configPath = "config/configs"
+const configPath = "configs"
 
 // Config stores general parametrs for the entire authentication service
 type Config struct {
