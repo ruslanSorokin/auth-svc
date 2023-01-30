@@ -6,8 +6,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-const configPath = "configs"
-
 // Config stores general parametrs for the entire authentication service
 type Config struct {
 	MongoDBURI string `mapstructure:"MONGO_DB_URI"`
@@ -25,8 +23,8 @@ type Config struct {
 }
 
 // Load config from configPath/{name}
-func Load(name string) (cfg Config, err error) {
-	viper.AddConfigPath(configPath)
+func Load(path, name string) (cfg Config, err error) {
+	viper.AddConfigPath(path)
 	viper.SetConfigName(name)
 
 	viper.SetConfigType("env")
