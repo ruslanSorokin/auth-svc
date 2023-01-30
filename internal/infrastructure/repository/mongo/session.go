@@ -3,8 +3,8 @@ package mongo
 import (
 	"context"
 
+	"github.com/ruslanSorokin/auth-service/pkg/domain/model"
 	"github.com/ruslanSorokin/auth-service/pkg/infrastructure/repository"
-	"github.com/ruslanSorokin/auth-service/pkg/model"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

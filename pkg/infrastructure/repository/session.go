@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"github.com/ruslanSorokin/auth-service/pkg/model"
+	"github.com/ruslanSorokin/auth-service/pkg/domain/model"
 )
 
 // ISessionRepository is an interface with custom CRUD-like operations for Session entity.
