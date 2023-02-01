@@ -26,21 +26,21 @@ func NewSessionRepository(URI, dbName, collectionName string) *SessionRepository
 }
 
 // CreateSession creates new session with given Session model and returns its ID
-func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session) (*string, error) {
+func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session) (string, error) {
 	res, err := r.db.InsertOne(ctx, s)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
 	id := string(res.InsertedID.(primitive.ObjectID).Hex())
 	s.ID = id
-	return &id, nil
+	return id, nil
 }
 
 // DeleteSessionByID deletes session by ID
-func (r *SessionRepository) DeleteSessionByID(ctx context.Context, ID *string) error {
+func (r *SessionRepository) DeleteSessionByID(ctx context.Context, ID string) error {
 	res, err := r.db.DeleteOne(ctx, bson.M{
-		"id": *ID,
+		"id": ID,
 	})
 
 	if err != nil {
@@ -54,7 +54,7 @@ func (r *SessionRepository) DeleteSessionByID(ctx context.Context, ID *string) e
 }
 
 // DeleteSessionByUserID deletes session by UserID
-func (r *SessionRepository) DeleteSessionByUserID(ctx context.Context, userID *string) error {
+func (r *SessionRepository) DeleteSessionByUserID(ctx context.Context, userID string) error {
 	res, err := r.db.DeleteOne(ctx, bson.M{
 		"user_id": userID,
 	})
@@ -70,7 +70,7 @@ func (r *SessionRepository) DeleteSessionByUserID(ctx context.Context, userID *s
 }
 
 // UpdateSessionByID updates session by ID
-func (r *SessionRepository) UpdateSessionByID(ctx context.Context, ID *string, s *model.Session) error {
+func (r *SessionRepository) UpdateSessionByID(ctx context.Context, ID string, s *model.Session) error {
 	res, err := r.db.UpdateOne(ctx, bson.M{
 		"id": ID,
 	}, s)
@@ -86,7 +86,7 @@ func (r *SessionRepository) UpdateSessionByID(ctx context.Context, ID *string, s
 }
 
 // UpdateSessionByUserID updates session by UserID
-func (r *SessionRepository) UpdateSessionByUserID(ctx context.Context, userID *string, s *model.Session) error {
+func (r *SessionRepository) UpdateSessionByUserID(ctx context.Context, userID string, s *model.Session) error {
 	res, err := r.db.UpdateOne(ctx, bson.M{
 		"user_id": userID,
 	}, s)
@@ -102,7 +102,7 @@ func (r *SessionRepository) UpdateSessionByUserID(ctx context.Context, userID *s
 }
 
 // GetSessionByID returns Session model by ID
-func (r *SessionRepository) GetSessionByID(ctx context.Context, ID *string) (*model.Session, error) {
+func (r *SessionRepository) GetSessionByID(ctx context.Context, ID string) (*model.Session, error) {
 	s := new(model.Session)
 
 	res := r.db.FindOne(ctx, bson.M{
@@ -121,7 +121,7 @@ func (r *SessionRepository) GetSessionByID(ctx context.Context, ID *string) (*mo
 }
 
 // GetSessionByUserID returns Sessions model by UserID
-func (r *SessionRepository) GetSessionByUserID(ctx context.Context, userID *string) (*model.Session, error) {
+func (r *SessionRepository) GetSessionByUserID(ctx context.Context, userID string) (*model.Session, error) {
 	s := new(model.Session)
 
 	res := r.db.FindOne(ctx, bson.M{
