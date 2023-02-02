@@ -2,8 +2,8 @@ package model
 
 // User is an entity of user used to pass over business logic.
 type User struct {
-	UserID         string `bson:"id" json:"id"`
-	Username       string `bson:"name" json:"name"`
-	Email          string `bson:"email" json:"email"`
-	HashedPassword string `bson:"hashed_password" json:"hashed_password"`
+	ID           string `bson:"id" json:"id,omitempty"`
+	Username     string `bson:"username" json:"username,omitempty"`
+	Email        string `bson:"email" json:"email,omitempty"`
+	PasswordHash string `bson:"password_hash" json:"password_hash,omitempty"`
 }
