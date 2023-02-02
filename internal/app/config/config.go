@@ -15,6 +15,10 @@ type (
 		ExternalServicePort int `mapstructure:"EXTERNAL_SERVICE_PORT"`
 	}
 
+	secret struct {
+		Password string `mapstructure:"PASSWORD"`
+	}
+
 	// Service part of the config contains everything used in usecases
 	Service struct {
 		MinUsernameLength int `mapstructure:"MIN_USERNAME_LENGTH"`
@@ -22,6 +26,8 @@ type (
 
 		MaxUsernameLength int `mapstructure:"MAX_USERNAME_LENGTH"`
 		MaxPasswordLength int `mapstructure:"MAX_PASSWORD_LENGTH"`
+
+		Secret secret `mapstructure:",squash"`
 	}
 
 	// JWT contains everething for JWT configuration
@@ -31,11 +37,6 @@ type (
 		AccessTokenExpiry  time.Duration `mapstructure:"ACCESS_TOKEN_EXPIRY"`
 		RefreshTokenExpiry time.Duration `mapstructure:"REFRESH_TOKEN_EXPIRY"`
 	}
-
-	// Secret part of the config contains the service's secrets
-	Secret struct {
-		InternalPassword string `mapstructure:"PASSWORD"`
-	}
 )
 
 // Config stores general parametrs for the authentication service
@@ -43,7 +44,6 @@ type Config struct {
 	Network Network `mapstructure:",squash"`
 	Service Service `mapstructure:",squash"`
 	JWT     JWT     `mapstructure:",squash"`
-	Secret  Secret  `mapstructure:",squash"`
 }
 
 // Load config from path/name
