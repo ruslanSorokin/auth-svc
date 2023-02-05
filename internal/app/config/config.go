@@ -7,63 +7,107 @@ import (
 )
 
 type (
-	// Network part of the config contains all network stuff
-	Network struct {
-		MongoDBURI string `mapstructure:"MONGO_DB_URI"`
+	// DB config
+	DB struct {
 
-		InternalServicePort int `mapstructure:"INTERNAL_SERVICE_PORT"`
-		ExternalServicePort int `mapstructure:"EXTERNAL_SERVICE_PORT"`
+		// Mongo config
+		Mongo struct {
+			URI      string
+			Username string
+			Password string
+		}
 	}
 
-	secret struct {
-		Password string `mapstructure:"PASSWORD"`
+	// Server config
+	Server struct {
+
+		// Internal server config
+		Internal struct {
+
+			// REST server config
+			REST struct {
+				Port int
+			}
+
+			// RPC server config
+			RPC struct {
+				Port int
+			}
+		}
+
+		// External server config
+		External struct {
+
+			// REST server config
+			REST struct {
+				Port int
+			}
+
+			// RPC server config
+			RPC struct {
+				Port int
+			}
+		}
 	}
 
-	// Service part of the config contains everything used in usecases
+	// Service config
 	Service struct {
-		MinUsernameLength int `mapstructure:"MIN_USERNAME_LENGTH"`
-		MinPasswordLength int `mapstructure:"MIN_PASSWORD_LENGTH"`
 
-		MaxUsernameLength int `mapstructure:"MAX_USERNAME_LENGTH"`
-		MaxPasswordLength int `mapstructure:"MAX_PASSWORD_LENGTH"`
+		// Validation config
+		Validation struct {
 
-		Secret secret `mapstructure:",squash"`
+			// UsernameLength config
+			UsernameLength struct {
+				Min int
+				Max int
+			}
+
+			// PasswordLength config
+			PasswordLength struct {
+				Min int
+				Max int
+			}
+		}
+
+		// Secret config
+		Secret struct {
+			Password string
+		}
 	}
 
-	// JWT contains everething for JWT configuration
+	// JWT config
 	JWT struct {
-		AccessTokenSecretKey string `mapstructure:"ACCESS_TOKEN_SECRET_KEY"`
+		AccessTokenSecretKey string
 
-		AccessTokenExpiry  time.Duration `mapstructure:"ACCESS_TOKEN_EXPIRY"`
-		RefreshTokenExpiry time.Duration `mapstructure:"REFRESH_TOKEN_EXPIRY"`
+		AccessTokenExpiry  time.Duration
+		RefreshTokenExpiry time.Duration
 	}
 )
 
 // Config stores general parametrs for the authentication service
 type Config struct {
-	Network Network `mapstructure:",squash"`
-	Service Service `mapstructure:",squash"`
-	JWT     JWT     `mapstructure:",squash"`
+	DB      DB
+	Server  Server
+	Service Service
+	JWT     JWT
 }
 
 // Load config from path/name
-func Load(path, name string) (*Config, error) {
+func Load(p, n string) (*Config, error) {
 	var cfg Config
+	viper := viper.New()
 
-	viper.AddConfigPath(path)
-	viper.SetConfigName(name)
+	viper.SetConfigType("yaml")
+	viper.SetConfigName(n)
+	viper.AddConfigPath(p)
 
-	viper.SetConfigType("env")
-	viper.AutomaticEnv()
-
-	err := viper.ReadInConfig()
-	if err != nil {
+	if err := viper.ReadInConfig(); err != nil {
 		return nil, err
 	}
 
-	err = viper.Unmarshal(&cfg)
-	if err != nil {
+	if err := viper.Unmarshal(&cfg); err != nil {
 		return nil, err
 	}
+
 	return &cfg, nil
 }

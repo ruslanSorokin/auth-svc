@@ -7,6 +7,7 @@ import (
 )
 
 const DefaultConfigPath = "configs"
+const DefaultConfigName = "default"
 
 func main() {
 	if err := run(); err != nil {
@@ -15,7 +16,7 @@ func main() {
 }
 
 func run() error {
-	_, err := config.Load(DefaultConfigPath, "default.env")
+	_, err := config.Load(DefaultConfigPath, DefaultConfigName)
 	if err != nil {
 		return err
 	}

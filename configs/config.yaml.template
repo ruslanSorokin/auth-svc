@@ -1,0 +1,38 @@
+db:
+  mongo:
+    uri: ""
+    username: ""
+    password: ""
+server:
+  internal:
+    rest:
+      port: 0
+    rpc:
+      port: 0
+  external:
+    rest:
+      port: 0
+    rpc:
+      port: 0
+service:
+  validation:
+    usernamelength:
+      min: 0
+      max: 0
+    passwordlength:
+      min: 0
+      max: 0
+  secret:
+    password: ""
+jwt:
+  accesstokensecretkey: ""
+  # s - seconds; m - minutes; h - hours
+  #
+  # Examples:
+  # 60m - 60 minutes
+  # 60m30s - 60 minutes and 30 seconds
+  # 60h15s - 60 hours and 15 seconds
+  # 60h30m15s - 60 hours, 30 minutes and 15 seconds
+  #
+  accesstokenexpiry: 0s
+  refreshtokenexpiry: 0s
