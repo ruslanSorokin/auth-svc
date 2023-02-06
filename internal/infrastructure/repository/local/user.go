@@ -24,22 +24,22 @@ func NewUserRepository() *UserRepository {
 	}
 }
 
-// GetUserByID returns User model by UserID
-func (r *UserRepository) GetUserByID(ctx context.Context, userID string) (*model.User, error) {
+// GetUserByGUID returns User model by UserGUID
+func (r *UserRepository) GetUserByGUID(ctx context.Context, GUID string) (*model.User, error) {
 	r.m.RLock()
-	s := *r.db[userID]
+	s := *r.db[GUID]
 	r.m.RUnlock()
 
 	return &s, nil
 }
 
 // GetUserByEmail returns User model by UserEmail
-func (r *UserRepository) GetUserByEmail(ctx context.Context, userEmail string) (*model.User, error) {
+func (r *UserRepository) GetUserByEmail(ctx context.Context, Email string) (*model.User, error) {
 	var s model.User
 
 	r.m.RLock()
 	for _, v := range r.db {
-		if v.Email == userEmail {
+		if v.Email == Email {
 			s = *v
 			break
 		}
