@@ -2,7 +2,6 @@ package local
 
 import (
 	"context"
-	"math/rand"
 	"sync"
 
 	"github.com/ruslanSorokin/auth-service/pkg/domain/model"
@@ -25,21 +24,9 @@ func NewSessionRepository() *SessionRepository {
 	}
 }
 
-const (
-	keyLength = 32
-)
-
-func randomString(l int) string {
-	r := make([]byte, l)
-	for i := 0; i < l; i++ {
-		r[i] = byte(rand.Intn(255))
-	}
-	return string(r)
-}
-
 // CreateSession creates new session with given Session model and returns its GUID
 func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session) (string, error) {
-	id := randomString(keyLength)
+	id := Hash(s)
 
 	r.m.Lock()
 	defer r.m.Unlock()
