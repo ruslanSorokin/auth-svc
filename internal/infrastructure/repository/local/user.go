@@ -24,7 +24,7 @@ func NewUserRepository() *UserRepository {
 	}
 }
 
-// GetUserByGUID returns User model by UserGUID
+// GetUserByGUID returns User model by GUID
 func (r *UserRepository) GetUserByGUID(ctx context.Context, GUID string) (*model.User, error) {
 	r.m.RLock()
 	s := *r.db[GUID]
@@ -33,13 +33,29 @@ func (r *UserRepository) GetUserByGUID(ctx context.Context, GUID string) (*model
 	return &s, nil
 }
 
-// GetUserByEmail returns User model by UserEmail
+// GetUserByEmail returns User model by email
 func (r *UserRepository) GetUserByEmail(ctx context.Context, Email string) (*model.User, error) {
 	var s model.User
 
 	r.m.RLock()
 	for _, v := range r.db {
 		if v.Email == Email {
+			s = *v
+			break
+		}
+	}
+	r.m.RUnlock()
+
+	return &s, nil
+}
+
+// GetUserByLogin returns User model by login
+func (r *UserRepository) GetUserByLogin(ctx context.Context, login string) (*model.User, error) {
+	var s model.User
+
+	r.m.RLock()
+	for _, v := range r.db {
+		if v.Login == login {
 			s = *v
 			break
 		}

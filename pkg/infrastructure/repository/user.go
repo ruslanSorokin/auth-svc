@@ -10,4 +10,5 @@ import (
 type IUserRepository interface {
 	GetUserByGUID(ctx context.Context, GUID string) (*model.User, error)
 	GetUserByEmail(ctx context.Context, Email string) (*model.User, error)
+	GetUserByLogin(ctx context.Context, login string) (*model.User, error)
 }

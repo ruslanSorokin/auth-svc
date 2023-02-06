@@ -36,7 +36,7 @@ func NewUserRepositoryFromConfig(cfg *config.DB) *UserRepository {
 	}
 }
 
-// GetUserByGUID returns User model by UserGUID
+// GetUserByGUID returns User model by GUID
 func (r *UserRepository) GetUserByGUID(ctx context.Context, GUID string) (*model.User, error) {
 	s := new(model.User)
 
@@ -54,7 +54,25 @@ func (r *UserRepository) GetUserByGUID(ctx context.Context, GUID string) (*model
 	return s, nil
 }
 
-// GetUserByEmail returns User model by UserEmail
+// GetUserByEmail returns User model by email
+func (r *UserRepository) GetUserByEmail(ctx context.Context, Email string) (*model.User, error) {
+	s := new(model.User)
+
+	res := r.db.FindOne(ctx, bson.M{
+		"email": Email,
+	})
+	if res.Err() != nil {
+		return nil, repository.ErrUserNotFound
+	}
+
+	err := res.Decode(s)
+	if err != nil {
+		return nil, err
+	}
+	return s, nil
+}
+
+// GetUserByLogin returns User model by login
 func (r *UserRepository) GetUserByLogin(ctx context.Context, login string) (*model.User, error) {
 	s := new(model.User)
 
