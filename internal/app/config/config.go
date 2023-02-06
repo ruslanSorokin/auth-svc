@@ -6,6 +6,18 @@ import (
 	"github.com/spf13/viper"
 )
 
+const (
+	// MaxLoginLength used for validations on service-layer
+	MaxLoginLength = 16
+	// MinLoginLength used for validations on service-layer
+	MinLoginLength = 8
+
+	// MaxPasswordLength used for validations on service-layer
+	MaxPasswordLength = 16
+	// MinPasswordLength used for validations on service-layer
+	MinPasswordLength = 8
+)
+
 type (
 	// DB config
 	DB struct {
@@ -55,22 +67,6 @@ type (
 
 	// Service config
 	Service struct {
-
-		// Validation config
-		Validation struct {
-
-			// UsernameLength config
-			UsernameLength struct {
-				Min int
-				Max int
-			}
-
-			// PasswordLength config
-			PasswordLength struct {
-				Min int
-				Max int
-			}
-		}
 
 		// Secret config
 		Secret struct {

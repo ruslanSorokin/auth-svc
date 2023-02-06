@@ -17,13 +17,6 @@ server:
     rpc:
       port: 0
 service:
-  validation:
-    usernamelength:
-      min: 0
-      max: 0
-    passwordlength:
-      min: 0
-      max: 0
   secret:
     password: ""
 jwt:
