@@ -1,8 +1,10 @@
 db:
   mongo:
     uri: ""
-    username: ""
-    password: ""
+    dbname: ""
+    tablename:
+      user: ""
+      session: ""
 server:
   internal:
     rest:

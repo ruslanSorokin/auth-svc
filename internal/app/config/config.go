@@ -12,9 +12,12 @@ type (
 
 		// Mongo config
 		Mongo struct {
-			URI      string
-			Username string
-			Password string
+			URI       string
+			DBName    string
+			TableName struct {
+				User    string
+				Session string
+			}
 		}
 	}
 

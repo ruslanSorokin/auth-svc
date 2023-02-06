@@ -3,6 +3,7 @@ package mongo
 import (
 	"context"
 
+	"github.com/ruslanSorokin/auth-service/internal/app/config"
 	"github.com/ruslanSorokin/auth-service/pkg/domain/model"
 	"github.com/ruslanSorokin/auth-service/pkg/infrastructure/repository"
 
@@ -21,7 +22,18 @@ var _ repository.ISessionRepository = (*SessionRepository)(nil)
 // NewSessionRepository is a default constructor
 func NewSessionRepository(URI, dbName, collectionName string) *SessionRepository {
 	return &SessionRepository{
-		db: newInstance(URI, dbName).Collection(collectionName),
+		db: newInstance(URI).
+			Database(dbName).
+			Collection(collectionName),
+	}
+}
+
+// NewSessionRepositoryFromConfig is custom constructor from config
+func NewSessionRepositoryFromConfig(cfg *config.DB) *SessionRepository {
+	return &SessionRepository{
+		db: newInstance(cfg.Mongo.URI).
+			Database(cfg.Mongo.DBName).
+			Collection(cfg.Mongo.TableName.Session),
 	}
 }
 

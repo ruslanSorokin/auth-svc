@@ -32,7 +32,7 @@ func mongoDB(URI string) *mongo.Client {
 	return c
 }
 
-func newInstance(URI, dbName string) *mongo.Database {
+func newInstance(URI string) *mongo.Client {
 	dbInstance := mongoDB(URI)
-	return dbInstance.Database(dbName)
+	return dbInstance
 }

@@ -6,8 +6,8 @@ import (
 	"github.com/ruslanSorokin/auth-service/internal/app/config"
 )
 
-const DefaultConfigPath = "configs"
-const DefaultConfigName = "default"
+const defaultConfigPath = "configs"
+const defaultConfigName = "default"
 
 func main() {
 	if err := run(); err != nil {
@@ -16,7 +16,7 @@ func main() {
 }
 
 func run() error {
-	_, err := config.Load(DefaultConfigPath, DefaultConfigName)
+	_, err := config.Load(defaultConfigPath, defaultConfigName)
 	if err != nil {
 		return err
 	}
