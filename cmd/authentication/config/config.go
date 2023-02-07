@@ -6,59 +6,40 @@ import (
 	"github.com/spf13/viper"
 )
 
-const (
-	// MaxLoginLength used for validations on service-layer
-	MaxLoginLength = 16
-	// MinLoginLength used for validations on service-layer
-	MinLoginLength = 8
-
-	// MaxPasswordLength used for validations on service-layer
-	MaxPasswordLength = 16
-	// MinPasswordLength used for validations on service-layer
-	MinPasswordLength = 8
-)
-
 type (
 	// DB config
 	DB struct {
-
-		// Mongo config
 		Mongo struct {
-			URI       string
-			DBName    string
-			TableName struct {
-				User    string
-				Session string
+			User struct {
+				URI       string
+				DBName    string
+				TableName string
+			}
+			Session struct {
+				URI       string
+				DBName    string
+				TableName string
 			}
 		}
 	}
 
 	// Server config
 	Server struct {
-
-		// Internal server config
 		Internal struct {
-
-			// REST server config
 			REST struct {
 				Port int
 			}
 
-			// RPC server config
 			RPC struct {
 				Port int
 			}
 		}
 
-		// External server config
 		External struct {
-
-			// REST server config
 			REST struct {
 				Port int
 			}
 
-			// RPC server config
 			RPC struct {
 				Port int
 			}
@@ -67,8 +48,6 @@ type (
 
 	// Service config
 	Service struct {
-
-		// Secret config
 		Secret struct {
 			Password string
 		}
@@ -76,7 +55,7 @@ type (
 
 	// JWT config
 	JWT struct {
-		AccessTokenSecretKey string
+		AccessTokenSecrets [3]string
 
 		AccessTokenExpiry  time.Duration
 		RefreshTokenExpiry time.Duration
@@ -91,14 +70,14 @@ type Config struct {
 	JWT     JWT
 }
 
-// Load config from path/name
-func Load(p, n string) (*Config, error) {
+// Load config from path
+func Load(path, name string) (*Config, error) {
 	var cfg Config
 	viper := viper.New()
 
 	viper.SetConfigType("yaml")
-	viper.SetConfigName(n)
-	viper.AddConfigPath(p)
+	viper.SetConfigName(name)
+	viper.AddConfigPath(path)
 
 	if err := viper.ReadInConfig(); err != nil {
 		return nil, err

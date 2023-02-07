@@ -3,7 +3,7 @@ package mongo
 import (
 	"context"
 
-	"github.com/ruslanSorokin/auth-service/internal/app/config"
+	"github.com/ruslanSorokin/auth-service/cmd/authentication/config"
 	"github.com/ruslanSorokin/auth-service/pkg/domain/model"
 	"github.com/ruslanSorokin/auth-service/pkg/infrastructure/repository"
 
@@ -31,9 +31,9 @@ func NewSessionRepository(URI, dbName, collectionName string) *SessionRepository
 // NewSessionRepositoryFromConfig is custom constructor from config
 func NewSessionRepositoryFromConfig(cfg *config.DB) *SessionRepository {
 	return &SessionRepository{
-		db: newInstance(cfg.Mongo.URI).
-			Database(cfg.Mongo.DBName).
-			Collection(cfg.Mongo.TableName.Session),
+		db: newInstance(cfg.Mongo.Session.URI).
+			Database(cfg.Mongo.Session.DBName).
+			Collection(cfg.Mongo.Session.TableName),
 	}
 }
 

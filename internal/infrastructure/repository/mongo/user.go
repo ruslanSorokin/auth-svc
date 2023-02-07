@@ -3,7 +3,7 @@ package mongo
 import (
 	"context"
 
-	"github.com/ruslanSorokin/auth-service/internal/app/config"
+	"github.com/ruslanSorokin/auth-service/cmd/registration/config"
 	"github.com/ruslanSorokin/auth-service/pkg/domain/model"
 	"github.com/ruslanSorokin/auth-service/pkg/infrastructure/repository"
 
@@ -30,9 +30,9 @@ func NewUserRepository(URI, dbName, collectionName string) *UserRepository {
 // NewUserRepositoryFromConfig is custom constructor from config
 func NewUserRepositoryFromConfig(cfg *config.DB) *UserRepository {
 	return &UserRepository{
-		db: newInstance(cfg.Mongo.URI).
-			Database(cfg.Mongo.DBName).
-			Collection(cfg.Mongo.TableName.User),
+		db: newInstance(cfg.Mongo.User.URI).
+			Database(cfg.Mongo.User.DBName).
+			Collection(cfg.Mongo.User.TableName),
 	}
 }
 
