@@ -1,0 +1,14 @@
+db:
+  mongo:
+    user:
+      uri: ""
+      dbname: ""
+      tablename: ""
+server:
+  rest:
+    port: 0
+  rpc:
+    port: 0
+service:
+  secret:
+    password: ""
