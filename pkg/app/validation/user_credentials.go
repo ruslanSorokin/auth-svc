@@ -1,13 +1,12 @@
 package validation
 
-const (
-	// MaxLoginLength used for validations on service-layer
-	MaxLoginLength = 16
-	// MinLoginLength used for validations on service-layer
-	MinLoginLength = 8
+func UserCredentials(login, password string) error {
+	if len(login) < MinLoginLength || len(login) > MaxLoginLength {
+		return ErrIncorrectUsernameLength
+	}
 
-	// MaxPasswordLength used for validations on service-layer
-	MaxPasswordLength = 24
-	// MinPasswordLength used for validations on service-layer
-	MinPasswordLength = 8
-)
+	if len(password) < MinPasswordLength || len(password) > MaxPasswordLength {
+		return ErrIncorrectPasswordLength
+	}
+	return nil
+}
