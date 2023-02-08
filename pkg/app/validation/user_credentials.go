@@ -7,7 +7,7 @@ const (
 	MinLoginLength = 8
 
 	// MaxPasswordLength used for validations on service-layer
-	MaxPasswordLength = 16
+	MaxPasswordLength = 24
 	// MinPasswordLength used for validations on service-layer
 	MinPasswordLength = 8
 )
