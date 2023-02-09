@@ -38,27 +38,27 @@ func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session)
 }
 
 // DeleteSessionByID deletes session by ID
-func (r *SessionRepository) DeleteSessionByID(ctx context.Context, ID string) error {
+func (r *SessionRepository) DeleteSessionByID(ctx context.Context, id string) error {
 	r.m.Lock()
 	defer r.m.Unlock()
 
-	_, ok := r.db[ID]
+	_, ok := r.db[id]
 	if !ok {
 		return repository.ErrSessionNotFound
 	}
 
-	delete(r.db, ID)
+	delete(r.db, id)
 
 	return nil
 }
 
-// DeleteSessionByUserID deletes session by UserID
-func (r *SessionRepository) DeleteSessionByUserID(ctx context.Context, userID string) error {
+// DeleteSessionByAccountID deletes session by AccountID
+func (r *SessionRepository) DeleteSessionByAccountID(ctx context.Context, accountID string) error {
 	r.m.Lock()
 	defer r.m.Unlock()
 
 	for k, v := range r.db {
-		if v.UserID == userID {
+		if v.AccountID == accountID {
 			delete(r.db, k)
 			return nil
 		}
@@ -68,25 +68,25 @@ func (r *SessionRepository) DeleteSessionByUserID(ctx context.Context, userID st
 }
 
 // UpdateSessionByID updates session by ID
-func (r *SessionRepository) UpdateSessionByID(ctx context.Context, ID string, s *model.Session) error {
+func (r *SessionRepository) UpdateSessionByID(ctx context.Context, id string, s *model.Session) error {
 	r.m.Lock()
 	defer r.m.Unlock()
 
-	_, ok := r.db[ID]
+	_, ok := r.db[id]
 	if !ok {
 		return repository.ErrSessionNotFound
 	}
 
-	r.db[ID] = s
+	r.db[id] = s
 
 	return nil
 }
 
-// UpdateSessionByUserID updates session by UserID
-func (r *SessionRepository) UpdateSessionByUserID(ctx context.Context, userID string, s *model.Session) error {
+// UpdateSessionByAccountID updates session by AccountID
+func (r *SessionRepository) UpdateSessionByAccountID(ctx context.Context, accountID string, s *model.Session) error {
 	r.m.Lock()
 	for k, v := range r.db {
-		if v.UserID == userID {
+		if v.AccountID == accountID {
 			r.db[k] = s
 			break
 		}
@@ -97,27 +97,27 @@ func (r *SessionRepository) UpdateSessionByUserID(ctx context.Context, userID st
 }
 
 // GetSessionByID returns Session model by ID
-func (r *SessionRepository) GetSessionByID(ctx context.Context, ID string) (*model.Session, error) {
+func (r *SessionRepository) GetSessionByID(ctx context.Context, id string) (*model.Session, error) {
 	r.m.RLock()
 	defer r.m.RUnlock()
 
-	_, ok := r.db[ID]
+	_, ok := r.db[id]
 	if !ok {
 		return nil, repository.ErrSessionNotFound
 	}
 
-	s := r.db[ID]
+	s := r.db[id]
 
 	return s, nil
 }
 
-// GetSessionByUserID returns Sessions model by UserID
-func (r *SessionRepository) GetSessionByUserID(ctx context.Context, userID string) (*model.Session, error) {
+// GetSessionByAccountID returns Sessions model by AccountID
+func (r *SessionRepository) GetSessionByAccountID(ctx context.Context, accountID string) (*model.Session, error) {
 	r.m.RLock()
 	defer r.m.RUnlock()
 
 	for _, v := range r.db {
-		if v.UserID == userID {
+		if v.AccountID == accountID {
 			return v, nil
 		}
 	}

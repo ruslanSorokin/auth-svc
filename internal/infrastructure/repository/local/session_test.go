@@ -19,9 +19,9 @@ func init() {
 }
 
 func TestBasic(t *testing.T) {
-	userID := "228"
+	accountID := "228"
 	want := &model.Session{
-		UserID: userID,
+		AccountID: accountID,
 	}
 
 	assert := assert.New(t)
@@ -34,13 +34,13 @@ func TestBasic(t *testing.T) {
 	assert.Nil(err, "Must be nil")
 	require.Equal(*want, *got, "Must be equal")
 
-	got, err = repo.GetSessionByUserID(context.Background(), userID)
+	got, err = repo.GetSessionByAccountID(context.Background(), accountID)
 	assert.Nil(err, "Must be nil")
 	require.Equal(*want, *got, "Must be equal")
 
 	err = repo.DeleteSessionByID(context.Background(), id)
 	assert.Nil(err, "Must be nil")
 
-	err = repo.DeleteSessionByUserID(context.Background(), userID)
+	err = repo.DeleteSessionByAccountID(context.Background(), accountID)
 	assert.EqualError(err, repository.ErrSessionNotFound.Error(), "Must be Error")
 }

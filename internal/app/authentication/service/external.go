@@ -13,16 +13,16 @@ import (
 type ExternalAuthorizer struct {
 	cfg         *config.Service
 	sessionRepo repository.ISessionRepository
-	userRepo    repository.IUserRepository
+	accountRepo repository.IAccountRepository
 }
 
 var _ service.IExternalAuthorizer = (*ExternalAuthorizer)(nil)
 
-func NewExternalAuthorizer(c *config.Service, s repository.ISessionRepository, u repository.IUserRepository) *ExternalAuthorizer {
+func NewExternalAuthorizer(c *config.Service, s repository.ISessionRepository, a repository.IAccountRepository) *ExternalAuthorizer {
 	return &ExternalAuthorizer{
 		cfg:         c,
 		sessionRepo: s,
-		userRepo:    u,
+		accountRepo: a,
 	}
 }
 

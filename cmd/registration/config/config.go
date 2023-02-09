@@ -8,7 +8,7 @@ type (
 	// DB config
 	DB struct {
 		Mongo struct {
-			User struct {
+			Account struct {
 				URI       string
 				DBName    string
 				TableName string

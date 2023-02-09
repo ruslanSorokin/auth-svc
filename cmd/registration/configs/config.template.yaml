@@ -1,6 +1,6 @@
 db:
   mongo:
-    user:
+    account:
       uri: ""
       dbname: ""
       tablename: ""

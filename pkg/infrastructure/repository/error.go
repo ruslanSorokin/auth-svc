@@ -7,5 +7,5 @@ var (
 )
 
 var (
-	ErrUserNotFound = errors.New("user is not found")
+	ErrAccountNotFound = errors.New("account is not found")
 )
