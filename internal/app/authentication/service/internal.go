@@ -3,31 +3,31 @@ package service
 import (
 	"context"
 
-	"github.com/ruslanSorokin/auth-service/pkg/app/authentication/service"
+	"github.com/ruslanSorokin/authentication-service/pkg/app/authentication/service"
 
-	"github.com/ruslanSorokin/auth-service/cmd/authentication/config"
+	"github.com/ruslanSorokin/authentication-service/cmd/authentication/config"
 )
 
-type InternalService struct {
+type InternalAuthorizer struct {
 	cfg *config.Service
 }
 
-var _ service.IInternalService = (*InternalService)(nil)
+var _ service.IInternalAuthorizer = (*InternalAuthorizer)(nil)
 
-func NewInternalService(c *config.Service) *InternalService {
-	return &InternalService{
+func NewInternalAuthorizer(c *config.Service) *InternalAuthorizer {
+	return &InternalAuthorizer{
 		cfg: c,
 	}
 }
 
-func (s *InternalService) GetSecrets(ctx context.Context, serviceName string, serviceGUID string, password string) (*[3]string, error) {
+func (a *InternalAuthorizer) GetSecrets(ctx context.Context, serviceName string, serviceGUID string, password string) (*[3]string, error) {
 	panic("not implemented") // TODO: Implement
 }
 
-func (s *InternalService) ForceLogoutAll(ctx context.Context, serviceName string, serviceGUID string, password string) (int, error) {
+func (a *InternalAuthorizer) ForceLogoutAll(ctx context.Context, serviceName string, serviceGUID string, password string) (int, error) {
 	panic("not implemented") // TODO: Implement
 }
 
-func (s *InternalService) ForceLogout(ctx context.Context, serviceName string, serviceGUID string, password string) error {
+func (a *InternalAuthorizer) ForceLogout(ctx context.Context, serviceName string, serviceGUID string, password string) error {
 	panic("not implemented") // TODO: Implement
 }
