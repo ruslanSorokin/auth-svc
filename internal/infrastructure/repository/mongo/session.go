@@ -37,7 +37,7 @@ func NewSessionRepositoryFromConfig(cfg *config.DB) *SessionRepository {
 	}
 }
 
-// CreateSession creates new session with given Session model and returns its GUID
+// CreateSession creates new session with given Session model and returns its ID
 func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session) (string, error) {
 	res, err := r.db.InsertOne(ctx, s)
 	if err != nil {
@@ -49,10 +49,10 @@ func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session)
 	return id, nil
 }
 
-// DeleteSessionByGUID deletes session by GUID
-func (r *SessionRepository) DeleteSessionByGUID(ctx context.Context, GUID string) error {
+// DeleteSessionByID deletes session by ID
+func (r *SessionRepository) DeleteSessionByID(ctx context.Context, ID string) error {
 	res, err := r.db.DeleteOne(ctx, bson.M{
-		"id": GUID,
+		"id": ID,
 	})
 
 	if err != nil {
@@ -65,10 +65,10 @@ func (r *SessionRepository) DeleteSessionByGUID(ctx context.Context, GUID string
 	return nil
 }
 
-// DeleteSessionByUserGUID deletes session by UserGUID
-func (r *SessionRepository) DeleteSessionByUserGUID(ctx context.Context, userGUID string) error {
+// DeleteSessionByUserID deletes session by UserID
+func (r *SessionRepository) DeleteSessionByUserID(ctx context.Context, userID string) error {
 	res, err := r.db.DeleteOne(ctx, bson.M{
-		"user_id": userGUID,
+		"user_id": userID,
 	})
 
 	if err != nil {
@@ -81,10 +81,10 @@ func (r *SessionRepository) DeleteSessionByUserGUID(ctx context.Context, userGUI
 	return nil
 }
 
-// UpdateSessionByGUID updates session by GUID
-func (r *SessionRepository) UpdateSessionByGUID(ctx context.Context, GUID string, s *model.Session) error {
+// UpdateSessionByID updates session by ID
+func (r *SessionRepository) UpdateSessionByID(ctx context.Context, ID string, s *model.Session) error {
 	res, err := r.db.UpdateOne(ctx, bson.M{
-		"id": GUID,
+		"id": ID,
 	}, s)
 
 	if err != nil {
@@ -97,10 +97,10 @@ func (r *SessionRepository) UpdateSessionByGUID(ctx context.Context, GUID string
 	return nil
 }
 
-// UpdateSessionByUserGUID updates session by UserGUID
-func (r *SessionRepository) UpdateSessionByUserGUID(ctx context.Context, userGUID string, s *model.Session) error {
+// UpdateSessionByUserID updates session by UserID
+func (r *SessionRepository) UpdateSessionByUserID(ctx context.Context, userID string, s *model.Session) error {
 	res, err := r.db.UpdateOne(ctx, bson.M{
-		"user_id": userGUID,
+		"user_id": userID,
 	}, s)
 
 	if err != nil {
@@ -113,12 +113,12 @@ func (r *SessionRepository) UpdateSessionByUserGUID(ctx context.Context, userGUI
 	return nil
 }
 
-// GetSessionByGUID returns Session model by GUID
-func (r *SessionRepository) GetSessionByGUID(ctx context.Context, GUID string) (*model.Session, error) {
+// GetSessionByID returns Session model by ID
+func (r *SessionRepository) GetSessionByID(ctx context.Context, ID string) (*model.Session, error) {
 	s := new(model.Session)
 
 	res := r.db.FindOne(ctx, bson.M{
-		"id": GUID,
+		"id": ID,
 	})
 	if res.Err() != nil {
 		return nil, repository.ErrSessionNotFound
@@ -132,12 +132,12 @@ func (r *SessionRepository) GetSessionByGUID(ctx context.Context, GUID string) (
 	return s, nil
 }
 
-// GetSessionByUserGUID returns Sessions model by UserGUID
-func (r *SessionRepository) GetSessionByUserGUID(ctx context.Context, userGUID string) (*model.Session, error) {
+// GetSessionByUserID returns Sessions model by UserID
+func (r *SessionRepository) GetSessionByUserID(ctx context.Context, userID string) (*model.Session, error) {
 	s := new(model.Session)
 
 	res := r.db.FindOne(ctx, bson.M{
-		"user_id": userGUID,
+		"user_id": userID,
 	})
 	if res.Err() != nil {
 		return nil, repository.ErrSessionNotFound

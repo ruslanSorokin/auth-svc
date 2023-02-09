@@ -24,10 +24,10 @@ func NewUserRepository() *UserRepository {
 	}
 }
 
-// GetUserByGUID returns User model by GUID
-func (r *UserRepository) GetUserByGUID(ctx context.Context, GUID string) (*model.User, error) {
+// GetUserByID returns User model by ID
+func (r *UserRepository) GetUserByID(ctx context.Context, ID string) (*model.User, error) {
 	r.m.RLock()
-	s := *r.db[GUID]
+	s := *r.db[ID]
 	r.m.RUnlock()
 
 	return &s, nil

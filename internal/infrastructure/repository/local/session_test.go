@@ -30,17 +30,17 @@ func TestBasic(t *testing.T) {
 	id, err := repo.CreateSession(context.Background(), want)
 	assert.Nil(err, "Must be nil")
 
-	got, err := repo.GetSessionByGUID(context.Background(), id)
+	got, err := repo.GetSessionByID(context.Background(), id)
 	assert.Nil(err, "Must be nil")
 	require.Equal(*want, *got, "Must be equal")
 
-	got, err = repo.GetSessionByUserGUID(context.Background(), userID)
+	got, err = repo.GetSessionByUserID(context.Background(), userID)
 	assert.Nil(err, "Must be nil")
 	require.Equal(*want, *got, "Must be equal")
 
-	err = repo.DeleteSessionByGUID(context.Background(), id)
+	err = repo.DeleteSessionByID(context.Background(), id)
 	assert.Nil(err, "Must be nil")
 
-	err = repo.DeleteSessionByUserGUID(context.Background(), userID)
+	err = repo.DeleteSessionByUserID(context.Background(), userID)
 	assert.EqualError(err, repository.ErrSessionNotFound.Error(), "Must be Error")
 }
