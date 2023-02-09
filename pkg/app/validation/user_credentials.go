@@ -1,4 +1,4 @@
-package config
+package validation
 
 const (
 	// MaxLoginLength used for validations on service-layer
