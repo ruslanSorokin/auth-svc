@@ -1,6 +1,8 @@
 package service
 
-import "context"
+import (
+	"context"
+)
 
 type IInternalAuthorizer interface {
 	GetSecrets(ctx context.Context, serviceName string, serviceGUID string, password string) (*[3]string, error)

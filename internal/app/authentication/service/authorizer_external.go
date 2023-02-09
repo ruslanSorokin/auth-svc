@@ -1,10 +1,7 @@
 package service
 
 import (
-	"context"
-
 	"github.com/ruslanSorokin/authentication-service/pkg/app/authentication/service"
-	"github.com/ruslanSorokin/authentication-service/pkg/domain/model"
 	"github.com/ruslanSorokin/authentication-service/pkg/infrastructure/repository"
 
 	"github.com/ruslanSorokin/authentication-service/cmd/authentication/config"
@@ -24,20 +21,4 @@ func NewExternalAuthorizer(c *config.Service, s repository.ISessionRepository, a
 		sessionRepo: s,
 		accountRepo: a,
 	}
-}
-
-func (a *ExternalAuthorizer) Login(ctx context.Context, login, password string) (*model.TokenPair, error) {
-	panic("not implemented") // TODO: Implement
-}
-
-func (a *ExternalAuthorizer) RefreshTokenPair(ctx context.Context, rToken string) (*model.TokenPair, error) {
-	panic("not implemented") // TODO: Implement
-}
-
-func (a *ExternalAuthorizer) Logout(ctx context.Context, rToken string) error {
-	panic("not implemented") // TODO: Implement
-}
-
-func (a *ExternalAuthorizer) LogoutAll(ctx context.Context, rToken string) error {
-	panic("not implemented") // TODO: Implement
 }
