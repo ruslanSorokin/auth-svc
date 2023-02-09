@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/ruslanSorokin/auth-service/pkg/domain/model"
-	"github.com/ruslanSorokin/auth-service/pkg/infrastructure/repository"
+	"github.com/ruslanSorokin/authentication-service/pkg/domain/model"
+	"github.com/ruslanSorokin/authentication-service/pkg/infrastructure/repository"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

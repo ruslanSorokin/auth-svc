@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/ruslanSorokin/auth-service/pkg/domain/model"
+	"github.com/ruslanSorokin/authentication-service/pkg/domain/model"
 )
 
 type IExternalService interface {

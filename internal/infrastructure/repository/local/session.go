@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/ruslanSorokin/auth-service/pkg/domain/model"
-	"github.com/ruslanSorokin/auth-service/pkg/infrastructure/repository"
+	"github.com/ruslanSorokin/authentication-service/pkg/domain/model"
+	"github.com/ruslanSorokin/authentication-service/pkg/infrastructure/repository"
 )
 
 // SessionRepository is in-memory implementation of ISessionRepository
