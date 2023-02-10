@@ -14,7 +14,7 @@ type AccountRepository struct {
 	m  *sync.RWMutex
 }
 
-var _ repository.ISessionRepository = (*SessionRepository)(nil)
+var _ repository.IAccountRepository = (*AccountRepository)(nil)
 
 // NewAccountRepository is a default constructor
 func NewAccountRepository() *AccountRepository {
