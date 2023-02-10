@@ -2,8 +2,8 @@ db:
   mongo:
     account:
       uri: ""
-      dbname: ""
-      tablename: ""
+      db: ""
+      table: ""
 server:
   rest:
     port: 0

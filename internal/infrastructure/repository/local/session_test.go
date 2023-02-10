@@ -11,11 +11,11 @@ import (
 )
 
 var (
-	repo *SessionRepository
+	repo *SessionStore
 )
 
 func init() {
-	repo = NewSessionRepository()
+	repo = NewSessionStore()
 }
 
 func TestBasic(t *testing.T) {

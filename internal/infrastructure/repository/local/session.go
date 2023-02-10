@@ -8,24 +8,24 @@ import (
 	"github.com/ruslanSorokin/authentication-service/pkg/infrastructure/repository"
 )
 
-// SessionRepository is in-memory implementation of ISessionRepository
-type SessionRepository struct {
+// SessionStore is in-memory implementation of ISessionRepository
+type SessionStore struct {
 	db map[string]*model.Session
 	m  *sync.RWMutex
 }
 
-var _ repository.ISessionRepository = (*SessionRepository)(nil)
+var _ repository.ISessionStore = (*SessionStore)(nil)
 
-// NewSessionRepository is a default constructor
-func NewSessionRepository() *SessionRepository {
-	return &SessionRepository{
+// NewSessionStore is a default constructor
+func NewSessionStore() *SessionStore {
+	return &SessionStore{
 		db: make(map[string]*model.Session),
 		m:  new(sync.RWMutex),
 	}
 }
 
 // CreateSession creates new session with given Session model and returns its ID
-func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session) (string, error) {
+func (r *SessionStore) CreateSession(ctx context.Context, s *model.Session) (string, error) {
 	id := Hash(s)
 
 	r.m.Lock()
@@ -38,7 +38,7 @@ func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session)
 }
 
 // DeleteSessionByID deletes session by ID
-func (r *SessionRepository) DeleteSessionByID(ctx context.Context, id string) error {
+func (r *SessionStore) DeleteSessionByID(ctx context.Context, id string) error {
 	r.m.Lock()
 	defer r.m.Unlock()
 
@@ -53,7 +53,7 @@ func (r *SessionRepository) DeleteSessionByID(ctx context.Context, id string) er
 }
 
 // DeleteSessionByAccountID deletes session by AccountID
-func (r *SessionRepository) DeleteSessionByAccountID(ctx context.Context, accountID string) error {
+func (r *SessionStore) DeleteSessionByAccountID(ctx context.Context, accountID string) error {
 	r.m.Lock()
 	defer r.m.Unlock()
 
@@ -68,7 +68,7 @@ func (r *SessionRepository) DeleteSessionByAccountID(ctx context.Context, accoun
 }
 
 // UpdateSessionByID updates session by ID
-func (r *SessionRepository) UpdateSessionByID(ctx context.Context, id string, s *model.Session) error {
+func (r *SessionStore) UpdateSessionByID(ctx context.Context, id string, s *model.Session) error {
 	r.m.Lock()
 	defer r.m.Unlock()
 
@@ -83,7 +83,7 @@ func (r *SessionRepository) UpdateSessionByID(ctx context.Context, id string, s 
 }
 
 // UpdateSessionByAccountID updates session by AccountID
-func (r *SessionRepository) UpdateSessionByAccountID(ctx context.Context, accountID string, s *model.Session) error {
+func (r *SessionStore) UpdateSessionByAccountID(ctx context.Context, accountID string, s *model.Session) error {
 	r.m.Lock()
 	for k, v := range r.db {
 		if v.AccountID == accountID {
@@ -97,7 +97,7 @@ func (r *SessionRepository) UpdateSessionByAccountID(ctx context.Context, accoun
 }
 
 // GetSessionByID returns Session model by ID
-func (r *SessionRepository) GetSessionByID(ctx context.Context, id string) (*model.Session, error) {
+func (r *SessionStore) GetSessionByID(ctx context.Context, id string) (*model.Session, error) {
 	r.m.RLock()
 	defer r.m.RUnlock()
 
@@ -112,7 +112,7 @@ func (r *SessionRepository) GetSessionByID(ctx context.Context, id string) (*mod
 }
 
 // GetSessionByAccountID returns Sessions model by AccountID
-func (r *SessionRepository) GetSessionByAccountID(ctx context.Context, accountID string) (*model.Session, error) {
+func (r *SessionStore) GetSessionByAccountID(ctx context.Context, accountID string) (*model.Session, error) {
 	r.m.RLock()
 	defer r.m.RUnlock()
 

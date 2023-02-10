@@ -9,9 +9,9 @@ type (
 	DB struct {
 		Mongo struct {
 			Account struct {
-				URI       string
-				DBName    string
-				TableName string
+				URI   string
+				DB    string
+				Table string
 			}
 		}
 	}

@@ -16,23 +16,23 @@ type AccountRepository struct {
 	db *mongo.Collection
 }
 
-var _ repository.IAccountRepository = (*AccountRepository)(nil)
+var _ repository.IAccountStore = (*AccountRepository)(nil)
 
-// NewAccountRepository is a default constructor
-func NewAccountRepository(URI, dbName, collectionName string) *AccountRepository {
+// NewAccountStore is a default constructor
+func NewAccountStore(URI, db, collection string) *AccountRepository {
 	return &AccountRepository{
 		db: newInstance(URI).
-			Database(dbName).
-			Collection(collectionName),
+			Database(db).
+			Collection(collection),
 	}
 }
 
-// NewAccountRepositoryFromConfig is custom constructor from config
-func NewAccountRepositoryFromConfig(cfg *config.DB) *AccountRepository {
+// NewAccountStoreFromConfig is custom constructor from config
+func NewAccountStoreFromConfig(cfg *config.DB) *AccountRepository {
 	return &AccountRepository{
 		db: newInstance(cfg.Mongo.Account.URI).
-			Database(cfg.Mongo.Account.DBName).
-			Collection(cfg.Mongo.Account.TableName),
+			Database(cfg.Mongo.Account.DB).
+			Collection(cfg.Mongo.Account.Table),
 	}
 }
 

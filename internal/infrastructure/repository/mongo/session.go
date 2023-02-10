@@ -12,33 +12,33 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-// SessionRepository is MongoDB implementation of ISessionRepository
-type SessionRepository struct {
+// SessionStore is MongoDB implementation of ISessionRepository
+type SessionStore struct {
 	db *mongo.Collection
 }
 
-var _ repository.ISessionRepository = (*SessionRepository)(nil)
+var _ repository.ISessionStore = (*SessionStore)(nil)
 
-// NewSessionRepository is a default constructor
-func NewSessionRepository(URI, dbName, collectionName string) *SessionRepository {
-	return &SessionRepository{
+// NewSessionStore is a default constructor
+func NewSessionStore(URI, db, collection string) *SessionStore {
+	return &SessionStore{
 		db: newInstance(URI).
-			Database(dbName).
-			Collection(collectionName),
+			Database(db).
+			Collection(collection),
 	}
 }
 
-// NewSessionRepositoryFromConfig is custom constructor from config
-func NewSessionRepositoryFromConfig(cfg *config.DB) *SessionRepository {
-	return &SessionRepository{
+// NewSessionStoreFromConfig is custom constructor from config
+func NewSessionStoreFromConfig(cfg *config.DB) *SessionStore {
+	return &SessionStore{
 		db: newInstance(cfg.Mongo.Session.URI).
-			Database(cfg.Mongo.Session.DBName).
-			Collection(cfg.Mongo.Session.TableName),
+			Database(cfg.Mongo.Session.DB).
+			Collection(cfg.Mongo.Session.Table),
 	}
 }
 
 // CreateSession creates new session with given Session model and returns its ID
-func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session) (string, error) {
+func (r *SessionStore) CreateSession(ctx context.Context, s *model.Session) (string, error) {
 	res, err := r.db.InsertOne(ctx, s)
 	if err != nil {
 		return "", err
@@ -50,7 +50,7 @@ func (r *SessionRepository) CreateSession(ctx context.Context, s *model.Session)
 }
 
 // DeleteSessionByID deletes session by ID
-func (r *SessionRepository) DeleteSessionByID(ctx context.Context, id string) error {
+func (r *SessionStore) DeleteSessionByID(ctx context.Context, id string) error {
 	res, err := r.db.DeleteOne(ctx, bson.M{
 		"id": id,
 	})
@@ -66,7 +66,7 @@ func (r *SessionRepository) DeleteSessionByID(ctx context.Context, id string) er
 }
 
 // DeleteSessionByAccountID deletes session by AccountID
-func (r *SessionRepository) DeleteSessionByAccountID(ctx context.Context, accountID string) error {
+func (r *SessionStore) DeleteSessionByAccountID(ctx context.Context, accountID string) error {
 	res, err := r.db.DeleteOne(ctx, bson.M{
 		"account_id": accountID,
 	})
@@ -82,7 +82,7 @@ func (r *SessionRepository) DeleteSessionByAccountID(ctx context.Context, accoun
 }
 
 // UpdateSessionByID updates session by ID
-func (r *SessionRepository) UpdateSessionByID(ctx context.Context, id string, s *model.Session) error {
+func (r *SessionStore) UpdateSessionByID(ctx context.Context, id string, s *model.Session) error {
 	res, err := r.db.UpdateOne(ctx, bson.M{
 		"id": id,
 	}, s)
@@ -98,7 +98,7 @@ func (r *SessionRepository) UpdateSessionByID(ctx context.Context, id string, s 
 }
 
 // UpdateSessionByAccountID updates session by AccountID
-func (r *SessionRepository) UpdateSessionByAccountID(ctx context.Context, accountID string, s *model.Session) error {
+func (r *SessionStore) UpdateSessionByAccountID(ctx context.Context, accountID string, s *model.Session) error {
 	res, err := r.db.UpdateOne(ctx, bson.M{
 		"account_id": accountID,
 	}, s)
@@ -114,7 +114,7 @@ func (r *SessionRepository) UpdateSessionByAccountID(ctx context.Context, accoun
 }
 
 // GetSessionByID returns Session model by ID
-func (r *SessionRepository) GetSessionByID(ctx context.Context, id string) (*model.Session, error) {
+func (r *SessionStore) GetSessionByID(ctx context.Context, id string) (*model.Session, error) {
 	s := new(model.Session)
 
 	res := r.db.FindOne(ctx, bson.M{
@@ -133,7 +133,7 @@ func (r *SessionRepository) GetSessionByID(ctx context.Context, id string) (*mod
 }
 
 // GetSessionByAccountID returns Sessions model by AccountID
-func (r *SessionRepository) GetSessionByAccountID(ctx context.Context, accountID string) (*model.Session, error) {
+func (r *SessionStore) GetSessionByAccountID(ctx context.Context, accountID string) (*model.Session, error) {
 	s := new(model.Session)
 
 	res := r.db.FindOne(ctx, bson.M{

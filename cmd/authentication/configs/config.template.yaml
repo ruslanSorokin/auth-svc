@@ -2,12 +2,12 @@ db:
   mongo:
     account:
       uri: ""
-      dbname: ""
-      tablename: ""
+      db: ""
+      table: ""
     session:
       uri: ""
-      dbname: ""
-      tablename: ""
+      db: ""
+      table: ""
 server:
   internal:
     rest:

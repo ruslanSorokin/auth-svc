@@ -8,24 +8,24 @@ import (
 	"github.com/ruslanSorokin/authentication-service/pkg/infrastructure/repository"
 )
 
-// AccountRepository is in-memory implementation of IAccountRepository
-type AccountRepository struct {
+// AccountStore is in-memory implementation of IAccountRepository
+type AccountStore struct {
 	db map[string]*model.Account
 	m  *sync.RWMutex
 }
 
-var _ repository.IAccountRepository = (*AccountRepository)(nil)
+var _ repository.IAccountStore = (*AccountStore)(nil)
 
-// NewAccountRepository is a default constructor
-func NewAccountRepository() *AccountRepository {
-	return &AccountRepository{
+// NewAccountStore is a default constructor
+func NewAccountStore() *AccountStore {
+	return &AccountStore{
 		db: make(map[string]*model.Account),
 		m:  new(sync.RWMutex),
 	}
 }
 
 // GetAccountByID returns Account model by ID
-func (r *AccountRepository) GetAccountByID(ctx context.Context, id string) (*model.Account, error) {
+func (r *AccountStore) GetAccountByID(ctx context.Context, id string) (*model.Account, error) {
 	r.m.RLock()
 	s := *r.db[id]
 	r.m.RUnlock()
@@ -34,7 +34,7 @@ func (r *AccountRepository) GetAccountByID(ctx context.Context, id string) (*mod
 }
 
 // GetAccountByEmail returns Account model by email
-func (r *AccountRepository) GetAccountByEmail(ctx context.Context, eMail string) (*model.Account, error) {
+func (r *AccountStore) GetAccountByEmail(ctx context.Context, eMail string) (*model.Account, error) {
 	var s model.Account
 
 	r.m.RLock()
@@ -50,7 +50,7 @@ func (r *AccountRepository) GetAccountByEmail(ctx context.Context, eMail string)
 }
 
 // GetAccountByLogin returns Account model by login
-func (r *AccountRepository) GetAccountByLogin(ctx context.Context, login string) (*model.Account, error) {
+func (r *AccountStore) GetAccountByLogin(ctx context.Context, login string) (*model.Account, error) {
 	var s model.Account
 
 	r.m.RLock()

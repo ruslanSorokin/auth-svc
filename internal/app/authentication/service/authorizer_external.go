@@ -8,17 +8,17 @@ import (
 )
 
 type ExternalAuthorizer struct {
-	cfg         *config.Service
-	sessionRepo repository.ISessionRepository
-	accountRepo repository.IAccountRepository
+	cfg          *config.Service
+	sessionStore repository.ISessionStore
+	accountStore repository.IAccountStore
 }
 
 var _ service.IExternalAuthorizer = (*ExternalAuthorizer)(nil)
 
-func NewExternalAuthorizer(c *config.Service, s repository.ISessionRepository, a repository.IAccountRepository) *ExternalAuthorizer {
+func NewExternalAuthorizer(c *config.Service, s repository.ISessionStore, a repository.IAccountStore) *ExternalAuthorizer {
 	return &ExternalAuthorizer{
-		cfg:         c,
-		sessionRepo: s,
-		accountRepo: a,
+		cfg:          c,
+		sessionStore: s,
+		accountStore: a,
 	}
 }
