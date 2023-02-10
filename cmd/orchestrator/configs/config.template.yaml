@@ -1,0 +1,31 @@
+db:
+  mongo:
+    account:
+      uri: ""
+      db: ""
+      table: ""
+    session:
+      uri: ""
+      db: ""
+      table: ""
+server:
+  internal:
+    rest:
+      port: 0
+    rpc:
+      port: 0
+  external:
+    rest:
+      port: 0
+    rpc:
+      port: 0
+service:
+  secret:
+    password: ""
+jwt:
+  accesstokensecrets:
+    -
+    -
+    -
+  accesstokenexpiry: 0s
+  refreshtokenexpiry: 0s
