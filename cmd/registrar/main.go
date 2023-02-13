@@ -7,7 +7,7 @@ import (
 )
 
 const configName = "default"
-const configPath = "cmd/registration/configs"
+const configPath = "cmd/registrar/configs"
 
 func main() {
 	if err := run(); err != nil {

@@ -7,7 +7,7 @@ import (
 )
 
 const configName = "default"
-const configPath = "cmd/authentication/configs"
+const configPath = "cmd/authorizer/configs"
 
 func main() {
 	if err := run(); err != nil {
