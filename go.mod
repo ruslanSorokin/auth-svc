@@ -3,7 +3,7 @@ module github.com/ruslanSorokin/auth-svc
 go 1.19
 
 require (
-	github.com/ruslanSorokin/authentication-service-api v0.9.1
+	github.com/ruslanSorokin/auth-svc-api v0.10.0
 	github.com/spf13/viper v1.14.0
 	github.com/stretchr/testify v1.8.1
 )
