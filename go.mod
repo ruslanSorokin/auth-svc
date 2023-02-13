@@ -1,4 +1,4 @@
-module github.com/ruslanSorokin/authentication-service
+module github.com/ruslanSorokin/auth-svc
 
 go 1.19
 

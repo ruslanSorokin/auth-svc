@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/ruslanSorokin/authentication-service/pkg/domain/model"
+	"github.com/ruslanSorokin/auth-svc/pkg/domain/model"
 )
 
 type IAuthorizer interface {

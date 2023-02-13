@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/ruslanSorokin/authentication-service/internal/config"
+	"github.com/ruslanSorokin/auth-svc/internal/config"
 	"github.com/spf13/viper"
 )
 

@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/ruslanSorokin/authentication-service/cmd/authorizer/config"
+	"github.com/ruslanSorokin/auth-svc/cmd/authorizer/config"
 )
 
 const configName = "default"

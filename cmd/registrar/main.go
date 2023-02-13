@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/ruslanSorokin/authentication-service/cmd/registrar/config"
+	"github.com/ruslanSorokin/auth-svc/cmd/registrar/config"
 )
 
 const configName = "default"

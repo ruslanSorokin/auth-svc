@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/ruslanSorokin/authentication-service/pkg/app/authorizer/service"
-	"github.com/ruslanSorokin/authentication-service/pkg/infra/repository"
+	"github.com/ruslanSorokin/auth-svc/pkg/app/authorizer/service"
+	"github.com/ruslanSorokin/auth-svc/pkg/infra/repository"
 
-	"github.com/ruslanSorokin/authentication-service/cmd/authorizer/config"
+	"github.com/ruslanSorokin/auth-svc/cmd/authorizer/config"
 )
 
 type Authorizer struct {

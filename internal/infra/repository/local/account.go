@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/ruslanSorokin/authentication-service/pkg/domain/model"
-	"github.com/ruslanSorokin/authentication-service/pkg/infra/repository"
+	"github.com/ruslanSorokin/auth-svc/pkg/domain/model"
+	"github.com/ruslanSorokin/auth-svc/pkg/infra/repository"
 )
 
 // AccountStore is in-memory implementation of IAccountRepository

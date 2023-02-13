@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/ruslanSorokin/authentication-service/pkg/app/orchestrator/service"
-	"github.com/ruslanSorokin/authentication-service/pkg/infra/repository"
+	"github.com/ruslanSorokin/auth-svc/pkg/app/orchestrator/service"
+	"github.com/ruslanSorokin/auth-svc/pkg/infra/repository"
 
-	"github.com/ruslanSorokin/authentication-service/cmd/orchestrator/config"
+	"github.com/ruslanSorokin/auth-svc/cmd/orchestrator/config"
 )
 
 type Orchestrator struct {

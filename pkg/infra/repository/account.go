@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"github.com/ruslanSorokin/authentication-service/pkg/domain/model"
+	"github.com/ruslanSorokin/auth-svc/pkg/domain/model"
 )
 
 // IAccountStore is an interface with custom CRUD-like operations for Account entity.
